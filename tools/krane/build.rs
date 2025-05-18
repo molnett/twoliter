@@ -14,7 +14,7 @@ fn main() {
     let script_dir = env::current_dir().unwrap();
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
 
-    println!("cargo::rerun-if-changed=../build-cache-fetch");
+    println!("cargo::rerun-if-changed=build-cache-fetch");
     println!("cargo::rerun-if-changed=hashes/crane");
     println!("cargo::rerun-if-changed=patches");
 
@@ -22,7 +22,7 @@ fn main() {
 
     // Download and checksum-verify crane
     env::set_current_dir(&out_dir).expect("Failed to set current directory");
-    Command::new(script_dir.join("../build-cache-fetch"))
+    Command::new(script_dir.join("build-cache-fetch"))
         .arg(script_dir.join("hashes/crane"))
         .status()
         .expect("Failed to execute build-cache-fetch");
